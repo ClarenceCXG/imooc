@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.mapper.RoleCourseMapper">
+
+  <resultMap id="BaseResultMap" type="com.imooc.bean.Course">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="cprice" jdbcType="REAL" property="cprice" />
+    <result column="cintroduce" jdbcType="VARCHAR" property="cintroduce" />
+    <result column="cstatus" jdbcType="VARCHAR" property="cstatus" />
+    <result column="cpicture" jdbcType="VARCHAR" property="cpicture" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="checkstatus" jdbcType="VARCHAR" property="checkstatus" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap1" type="com.imooc.bean.RoleCourse">
+    <id column="rc_id" jdbcType="INTEGER" property="rcId" />
+    <result column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="uc_status" jdbcType="INTEGER" property="ucStatus" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    cid, cname, cprice, cintroduce, cstatus, cpicture, ctime, checkstatus
+  </sql>
+
+  <sql id="Base_Column_List1">
+    rc_id, rid, cid, uc_status
+  </sql>
+
+  <insert id="insert" parameterType="com.imooc.bean.RoleCourse">
+    insert into t_role_course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rcId != null">
+        rc_id,
+      </if>
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="ucStatus != null">
+        uc_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rcId != null">
+        #{rcId,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="ucStatus != null">
+        #{ucStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_role_course
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_course
+    where cid in
+    (select cid from t_role_course where rid = #{rid,jdbcType=INTEGER})
+  </select>
+
+  <select id="selectByRid" parameterType="java.lang.Integer" resultMap="BaseResultMap1">
+    select
+    <include refid="Base_Column_List1" />
+    from t_role_course
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.bean.RoleCourse">
+    update t_role_course
+    <set>
+      <if test="rid != null">
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="ucStatus != null">
+        uc_status = #{ucStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rc_id = #{rcId,jdbcType=INTEGER}
+  </update>
+
+</mapper>
+
+
+
+

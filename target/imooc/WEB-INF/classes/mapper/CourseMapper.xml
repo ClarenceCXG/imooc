@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.mapper.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.imooc.bean.Course">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="cprice" jdbcType="REAL" property="cprice" />
+    <result column="cintroduce" jdbcType="VARCHAR" property="cintroduce" />
+    <result column="cstatus" jdbcType="VARCHAR" property="cstatus" />
+    <result column="cpicture" jdbcType="VARCHAR" property="cpicture" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="checkstatus" jdbcType="VARCHAR" property="checkstatus" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    cid, cname, cprice, cintroduce, cstatus, cpicture, ctime, checkstatus
+  </sql>
+
+  <insert id="insert" parameterType="com.imooc.bean.Course">
+    insert into t_course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="cname != null">
+        cname,
+      </if>
+      <if test="cprice != null">
+        cprice,
+      </if>
+      <if test="cintroduce != null">
+        cintroduce,
+      </if>
+      <if test="cstatus != null">
+        cstatus,
+      </if>
+      <if test="cpicture != null">
+        cpicture,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="checkstatus != null">
+        checkstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null">
+        #{cprice,jdbcType=REAL},
+      </if>
+      <if test="cintroduce != null">
+        #{cintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="cstatus != null">
+        #{cstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="cpicture != null">
+        #{cpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkstatus != null">
+        #{checkstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByName" parameterType="java.lang.String">
+    delete from t_course
+    where cname = #{cname,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_course
+    where cname = #{cname,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCstatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_course
+    where cstatus = #{cstatus,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCheckStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_course
+    where checkstatus = #{checkstatus,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_course
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.bean.Course">
+    update t_course
+    <set>
+      <if test="cname != null">
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null">
+        cprice = #{cprice,jdbcType=REAL},
+      </if>
+      <if test="cintroduce != null">
+        cintroduce = #{cintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="cstatus != null">
+        cstatus = #{cstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="cpicture != null">
+        cpicture = #{cpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkstatus != null">
+        checkstatus = #{checkstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+
+  <!--更新0.2-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.imooc.bean.Course">-->
+    <!--update t_course-->
+    <!--set cname = #{cname,jdbcType=VARCHAR},-->
+      <!--cprice = #{cprice,jdbcType=REAL},-->
+      <!--cintroduce = #{cintroduce,jdbcType=VARCHAR},-->
+      <!--cstatus = #{cstatus,jdbcType=VARCHAR},-->
+      <!--cpicture = #{cpicture,jdbcType=VARCHAR},-->
+      <!--ctime = #{ctime,jdbcType=TIMESTAMP},-->
+      <!--checkstatus = #{checkstatus,jdbcType=VARCHAR}-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>
