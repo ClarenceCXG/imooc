@@ -32,6 +32,15 @@ public class CourseService{
     }
 
     /**
+     * 根据关键字查询课程
+     * @param courseKey
+     * @return
+     */
+    public List<Course> selectCourseByKey(String courseKey){
+        return courseMapper.selectCourseByKey(courseKey);
+    }
+
+    /**
      * 根据课程名返回课程结果集
      * @param cname
      * @return

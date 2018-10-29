@@ -79,6 +79,12 @@ public class Dao_Test {
         System.out.println("hello");
         List<Course> r = courseMapper.selectByName("Java进阶");
         r.get(0).display();
+
+        r = courseMapper.selectCourseByKey("Java");
+        for (int i =0;i < r.size();i++){
+            r.get(i).display();
+        }
+
         System.out.println("bye-bye");
     }
 

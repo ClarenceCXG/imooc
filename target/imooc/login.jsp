@@ -24,13 +24,13 @@
 
         /*上边距调整*/
         .top_taable{
-            margin-top: 5%;
+            margin-top: 0%;
         }
         /*整个登陆框架的样式*/
         .product-container {
             border-radius: 10px;
             background: #ffffff;
-            margin-top: 10%;
+            margin-top: 0%;
             border:1px solid #000000;
         }
 

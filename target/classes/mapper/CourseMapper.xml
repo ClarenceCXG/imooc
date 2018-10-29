@@ -77,6 +77,13 @@
     where cname = #{cname,jdbcType=VARCHAR}
   </delete>
 
+  <select id="selectCourseByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_course
+    where cname like CONCAT('%',#{courseKey},'%')
+  </select>
+
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

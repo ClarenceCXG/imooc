@@ -29,6 +29,13 @@ public interface CourseMapper {
     /*---------------------查---------------------*/
 
     /**
+     * 根据关键字查询课程
+     * @param courseKey
+     * @return
+     */
+    List<Course> selectCourseByKey(String courseKey);
+
+    /**
      * 根据课程名字查询
      * @param cname
      * @return
